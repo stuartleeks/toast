@@ -2,3 +2,4 @@
 vendor/*
 !vendor/vendor.json
 dist/*
+main.exe
