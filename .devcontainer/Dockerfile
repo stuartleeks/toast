@@ -64,6 +64,13 @@ RUN \
     # --> Go releaser 
     curl -sfL https://install.goreleaser.com/github.com/goreleaser/goreleaser.sh | BINDIR="$GOPATH/bin" sh -s -- "v0.164.0"
 
+# gh
+COPY scripts/gh.sh /tmp/
+RUN /tmp/gh.sh
+
+# symlink gh config folder
+RUN echo 'ln -s /config/gh /home/vscode/.config/gh ' >> ~/.bashrc
+
 # __DEVCONTAINER_SNIPPET_INSERT__ (control where snippets get inserted using the devcontainer CLI)
 
 # Switch back to dialog for any ad-hoc use of apt-get
