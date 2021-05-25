@@ -3,6 +3,7 @@
 This repo contains a fork of the original [go-toast/toast](https://github.com/go-toast/toast) with the following changes:
 * Added go mod support
 * Updated `toast` CLI to not display console window
+* Added [VS Code dev contaier](https://code.visualstudio.com/docs/remote/containers)
 
 A go package for Windows 10 toast notifications.
 
