@@ -24,6 +24,7 @@ endif
 		-e IS_PR="${IS_PR}" \
 		-e BRANCH="${BRANCH}" \
 		-e GITHUB_TOKEN="${GITHUB_TOKEN}" \
+		-e GOOS=windows\
 		--entrypoint /bin/bash \
 		--workdir "${PWD}" \
 		devcontainer-cli \
