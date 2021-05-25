@@ -10,8 +10,9 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/nu7hatch/gouuid"
 	"syscall"
+
+	uuid "github.com/nu7hatch/gouuid"
 )
 
 var toastTemplate *template.Template
@@ -25,43 +26,43 @@ type toastAudio string
 
 const (
 	Default        toastAudio = "ms-winsoundevent:Notification.Default"
-	IM                        = "ms-winsoundevent:Notification.IM"
-	Mail                      = "ms-winsoundevent:Notification.Mail"
-	Reminder                  = "ms-winsoundevent:Notification.Reminder"
-	SMS                       = "ms-winsoundevent:Notification.SMS"
-	LoopingAlarm              = "ms-winsoundevent:Notification.Looping.Alarm"
-	LoopingAlarm2             = "ms-winsoundevent:Notification.Looping.Alarm2"
-	LoopingAlarm3             = "ms-winsoundevent:Notification.Looping.Alarm3"
-	LoopingAlarm4             = "ms-winsoundevent:Notification.Looping.Alarm4"
-	LoopingAlarm5             = "ms-winsoundevent:Notification.Looping.Alarm5"
-	LoopingAlarm6             = "ms-winsoundevent:Notification.Looping.Alarm6"
-	LoopingAlarm7             = "ms-winsoundevent:Notification.Looping.Alarm7"
-	LoopingAlarm8             = "ms-winsoundevent:Notification.Looping.Alarm8"
-	LoopingAlarm9             = "ms-winsoundevent:Notification.Looping.Alarm9"
-	LoopingAlarm10            = "ms-winsoundevent:Notification.Looping.Alarm10"
-	LoopingCall               = "ms-winsoundevent:Notification.Looping.Call"
-	LoopingCall2              = "ms-winsoundevent:Notification.Looping.Call2"
-	LoopingCall3              = "ms-winsoundevent:Notification.Looping.Call3"
-	LoopingCall4              = "ms-winsoundevent:Notification.Looping.Call4"
-	LoopingCall5              = "ms-winsoundevent:Notification.Looping.Call5"
-	LoopingCall6              = "ms-winsoundevent:Notification.Looping.Call6"
-	LoopingCall7              = "ms-winsoundevent:Notification.Looping.Call7"
-	LoopingCall8              = "ms-winsoundevent:Notification.Looping.Call8"
-	LoopingCall9              = "ms-winsoundevent:Notification.Looping.Call9"
-	LoopingCall10             = "ms-winsoundevent:Notification.Looping.Call10"
-	Silent                    = "silent"
+	IM             toastAudio = "ms-winsoundevent:Notification.IM"
+	Mail           toastAudio = "ms-winsoundevent:Notification.Mail"
+	Reminder       toastAudio = "ms-winsoundevent:Notification.Reminder"
+	SMS            toastAudio = "ms-winsoundevent:Notification.SMS"
+	LoopingAlarm   toastAudio = "ms-winsoundevent:Notification.Looping.Alarm"
+	LoopingAlarm2  toastAudio = "ms-winsoundevent:Notification.Looping.Alarm2"
+	LoopingAlarm3  toastAudio = "ms-winsoundevent:Notification.Looping.Alarm3"
+	LoopingAlarm4  toastAudio = "ms-winsoundevent:Notification.Looping.Alarm4"
+	LoopingAlarm5  toastAudio = "ms-winsoundevent:Notification.Looping.Alarm5"
+	LoopingAlarm6  toastAudio = "ms-winsoundevent:Notification.Looping.Alarm6"
+	LoopingAlarm7  toastAudio = "ms-winsoundevent:Notification.Looping.Alarm7"
+	LoopingAlarm8  toastAudio = "ms-winsoundevent:Notification.Looping.Alarm8"
+	LoopingAlarm9  toastAudio = "ms-winsoundevent:Notification.Looping.Alarm9"
+	LoopingAlarm10 toastAudio = "ms-winsoundevent:Notification.Looping.Alarm10"
+	LoopingCall    toastAudio = "ms-winsoundevent:Notification.Looping.Call"
+	LoopingCall2   toastAudio = "ms-winsoundevent:Notification.Looping.Call2"
+	LoopingCall3   toastAudio = "ms-winsoundevent:Notification.Looping.Call3"
+	LoopingCall4   toastAudio = "ms-winsoundevent:Notification.Looping.Call4"
+	LoopingCall5   toastAudio = "ms-winsoundevent:Notification.Looping.Call5"
+	LoopingCall6   toastAudio = "ms-winsoundevent:Notification.Looping.Call6"
+	LoopingCall7   toastAudio = "ms-winsoundevent:Notification.Looping.Call7"
+	LoopingCall8   toastAudio = "ms-winsoundevent:Notification.Looping.Call8"
+	LoopingCall9   toastAudio = "ms-winsoundevent:Notification.Looping.Call9"
+	LoopingCall10  toastAudio = "ms-winsoundevent:Notification.Looping.Call10"
+	Silent         toastAudio = "silent"
 )
 
 type toastDuration string
 
 const (
 	Short toastDuration = "short"
-	Long                = "long"
+	Long  toastDuration = "long"
 )
 
 func init() {
 	toastTemplate = template.New("toast")
-	toastTemplate.Parse(`
+	_, _ = toastTemplate.Parse(`
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
 [Windows.UI.Notifications.ToastNotification, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
 [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null

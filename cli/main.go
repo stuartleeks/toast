@@ -17,7 +17,7 @@ func main() {
 	app.Version = "v1"
 	app.Compiled = time.Now()
 	app.Authors = []cli.Author{
-		cli.Author{
+		{
 			Name:  "Jacob Marshall",
 			Email: "go-toast@jacobmarshall.co",
 		},
@@ -129,5 +129,5 @@ func main() {
 		return nil
 	}
 
-	app.Run(os.Args)
+	_ = app.Run(os.Args)
 }

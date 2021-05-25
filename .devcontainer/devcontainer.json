@@ -1,0 +1,67 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.117.1/containers/go
+{
+	"name": "toast",
+	"dockerFile": "Dockerfile",
+
+	"mounts": [
+		// Keep command history 
+		"source=toast-bashhistory,target=/home/vscode/commandhistory",
+		// Mounts the .config/gh host folder into the dev container to pick up host gh CLI login details
+		// NOTE that mounting directly to ~/.config/gh makes ~/.config only root-writable
+		// Instead monut to another location and symlink in Dockerfile
+		"type=bind,source=${env:HOME}${env:USERPROFILE}/.config/gh,target=/config/gh",
+	],
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"files.eol": "\n", 
+		"go.useLanguageServer": true,
+		"[go]": {
+			"editor.snippetSuggestions": "none",
+			"editor.formatOnSave": true,
+			"editor.codeActionsOnSave": {
+				"source.organizeImports": true
+			}
+		},
+		"gopls": {
+			"usePlaceholders": true, // add parameter placeholders when completing a function
+			// Experimental settings
+			"completeUnimported": true, // autocomplete unimported packages
+			"deepCompletion": true // enable deep completion
+		},
+		"go.delveConfig": {
+			"dlvLoadConfig": {
+				"followPointers": true,
+				"maxVariableRecurse": 1,
+				"maxStringLen": 1024,
+				"maxArrayValues": 64,
+				"maxStructFields": -1
+			},
+			"apiVersion": 2,
+			"showGlobalVariables": false,
+			"debugAdapter": "legacy"
+		}
+	},
+
+	"containerEnv": {
+		"GOOS": "windows"
+	},
+	
+	// Add the IDs of extensions you want installed when the container is created.
+	// "extensions": [],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "echo hello",
+
+	"remoteUser": "vscode",
+	
+	"extensions": [
+		"golang.go",
+		"stuartleeks.vscode-go-by-example",
+	]
+}
