@@ -13,10 +13,10 @@ As seen in [jacobmarshall/pokevision-cli](https://github.com/jacobmarshall/pokev
 
 As well as using go-toast within your Go projects, you can also utilise the CLI - for any of your projects.
 
-Download [64bit](https://go-toast-downloads.s3.amazonaws.com/v1/toast64.exe) or [32bit](https://go-toast-downloads.s3.amazonaws.com/v1/toast32.exe)
+Download the [latest release](https://github.com/stuartleeks/toast/releases/latest) and extract `toast.exe`
 
 ```cmd
-C:\Users\Example\Downloads\toast64.exe \
+C:\Users\Example\Downloads\toast.exe \
   --app-id "Example App" \
   --title "Hello World" \
   --message "Lorem ipsum dolor sit amet, consectetur adipiscing elit." \
